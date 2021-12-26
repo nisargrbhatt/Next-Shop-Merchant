@@ -1,4 +1,3 @@
-import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
 import {
   EmailOtpCheckResponse,
@@ -19,6 +18,7 @@ import { environment } from 'src/environments/environment';
 import { ErrorComponent } from '../../shared/dialog/error/error.component';
 import { ResMesComponent } from '../../shared/dialog/res-mes/res-mes.component';
 import { Subscription } from 'rxjs';
+import { Auth0Service } from 'src/app/auth/auth0.service';
 
 @Component({
   selector: 'app-verify-email',
@@ -42,7 +42,7 @@ export class VerifyEmailComponent implements OnInit, OnDestroy {
     private router: Router,
     private snackbarService: MatSnackBar,
     private dialogService: MatDialog,
-    private authService: AuthService,
+    private authService: Auth0Service,
   ) {}
 
   ngOnInit(): void {
