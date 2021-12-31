@@ -1,0 +1,23 @@
+<div *ngIf="!pageLoading">
+  <div class="hero">
+    <div class="hero-form">
+      <form [formGroup]="kycApprovalForm" (submit)="onCreate()">
+        <mat-form-field>
+          <mat-label> Name </mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Enter your Aadhaar Registered Name"
+            formControlName="name"
+            name="name"
+          />
+          <mat-error *ngIf="kycApprovalForm.get('name').hasError('required')"
+            >Name is required.
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-loader *ngIf="pageLoading"></app-loader>
