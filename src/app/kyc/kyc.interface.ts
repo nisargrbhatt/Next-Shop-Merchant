@@ -10,10 +10,10 @@ export interface DialogData {
 
 export interface FindAllKYCApprovalsResponseData {
   count: number;
-  rows: any;
+  rows: FindKYCApprovalResponseDataRows[];
 }
 
-export interface FindKYCApprovalResponseData {
+export interface FindKYCApprovalResponseDataRows {
   id: string;
   name: string;
   aadhaar_number: string;
@@ -78,5 +78,5 @@ export interface FindKYCApprovalResponse {
   valid: boolean;
   error?: ErrorData;
   dialog?: DialogData;
-  data?: FindKYCApprovalResponseData;
+  data?: FindKYCApprovalResponseDataRows;
 }

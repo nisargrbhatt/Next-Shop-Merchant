@@ -39,11 +39,11 @@
           Contact No: {{ kycApproval.contact_no }}
         </p>
         <p *ngIf="kycApproval.email">Email: {{ kycApproval.email }}</p>
-        <p *ngIf="kycApproval.admin_decision === false">Status: Pending</p>
+        <p *ngIf="kycApproval.kyc_approval === false">Status: Pending</p>
         <p
           *ngIf="
-            kycApproval.admin_decision === true &&
-            kycApproval.kyc_approval === false
+            kycApproval.admin_decision === false &&
+            kycApproval.kyc_approval === true
           "
         >
           Status: Declined
