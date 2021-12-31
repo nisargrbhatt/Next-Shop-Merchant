@@ -13,14 +13,49 @@ export interface FindAllKYCApprovalsResponseData {
   rows: any;
 }
 
-export interface FindKYCApprovalResponseData {}
+export interface FindKYCApprovalResponseData {
+  id: string;
+  name: string;
+  aadhaar_number: string;
+  contact_no: string;
+  email: string;
+  kyc_approval: boolean;
+  admin_decision: boolean;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
+  user: User;
+  images: Image[];
+}
 
+export interface Image {
+  id: string;
+  name: string;
+  url: string;
+  kycId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  contact_no: null;
+  role: string;
+  email_otp: null;
+  email_otp_sent_time: null;
+  email_verified: boolean;
+  merchant_or_manufacturer_verified: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 export interface CreateKycApprovalData {
   name: string;
   aadhaar_number: string;
   contact_no?: string;
   email?: string;
-  photo?: string[];
+  image?: any[];
 }
 
 export interface CreateKycApprovalResponse {
@@ -43,6 +78,5 @@ export interface FindKYCApprovalResponse {
   valid: boolean;
   error?: ErrorData;
   dialog?: DialogData;
-  data?: any;
-  // data?: FindKYCApprovalResponseData;
+  data?: FindKYCApprovalResponseData;
 }

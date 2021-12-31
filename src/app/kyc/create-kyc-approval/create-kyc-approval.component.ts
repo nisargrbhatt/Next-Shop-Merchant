@@ -1,8 +1,21 @@
-import { mimeType } from './mime-type.validator';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Auth0Service } from 'src/app/auth/auth0.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CreateKycApprovalResponse } from './../kyc.interface';
+
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+  FormArray,
+} from '@angular/forms';
+
 import { KycService } from './../kyc.service';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { ErrorComponent } from 'src/app/shared/dialog/error/error.component';
+import { ResMesComponent } from 'src/app/shared/dialog/res-mes/res-mes.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-create-kyc-approval',
@@ -16,17 +29,25 @@ export class CreateKycApprovalComponent implements OnInit {
   images: string[] = [];
 
   kycApprovalForm: FormGroup;
+  public imageForm: FormGroup;
 
   constructor(
     private kycService: KycService,
-    private authService: Auth0Service,
-  ) {}
+    private formBuilder: FormBuilder,
+    private snackBarService: MatSnackBar,
+    private dialogService: MatDialog,
+    private router: Router,
+  ) {
+    this.imageForm = this.formBuilder.group({
+      photos: this.formBuilder.array([]),
+    });
+  }
 
   ngOnInit(): void {
     this.pageLoading = true;
     this.formLoading = true;
 
-    this.kycApprovalForm = new FormGroup({
+    this.kycApprovalForm = this.formBuilder.group({
       name: new FormControl(
         { value: '', disabled: this.disableControl },
         { validators: [Validators.required] },
@@ -53,48 +74,51 @@ export class CreateKycApprovalComponent implements OnInit {
           validators: [Validators.email, Validators.required],
         },
       ),
-      photo: new FormControl(
-        { value: null, disabled: this.disableControl },
-        {
-          validators: [Validators.required],
-          asyncValidators: [mimeType],
-        },
-      ),
+      photo: this.formBuilder.array([]),
     });
 
     this.formLoading = false;
     this.pageLoading = false;
   }
 
-  onFileChange(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      var filesAmount = event.target.files.length;
-      for (let i = 0; i < filesAmount; i++) {
-        var reader = new FileReader();
+  createItem(data: any): FormGroup {
+    return this.formBuilder.group(data);
+  }
 
-        reader.onload = (event: any) => {
-          console.log(event.target.result);
-          this.images.push(event.target.result);
+  get photos(): FormArray {
+    return this.imageForm.get('photos') as FormArray;
+  }
 
-          this.kycApprovalForm.patchValue({
-            photo: this.images,
-          });
+  detectFiles(event: any): void {
+    const files = event.target.files;
+    if (files) {
+      for (const file of files) {
+        const reader = new FileReader();
+
+        reader.onload = (e: any) => {
+          this.photos.push(
+            this.createItem({
+              file,
+              url: e.target.result,
+            }),
+          );
         };
-
-        reader.readAsDataURL(event.target.files[i]);
+        reader.readAsDataURL(file);
       }
     }
   }
 
-  get KycApprovalFormControls() {
-    return this.kycApprovalForm.controls;
+  removePhoto(i: number): void {
+    this.photos.removeAt(i);
   }
 
   async onCreate(): Promise<void> {
-    if (this.kycApprovalForm.invalid) {
+    if (this.kycApprovalForm.invalid && this.imageForm.value.photo.length > 0) {
       return;
     }
-    console.log(this.kycApprovalForm.value);
+
+    this.formLoading = true;
+    this.disableControl = true;
 
     const kycApprovalFormData = new FormData();
     kycApprovalFormData.append('name', this.kycApprovalForm.value.name);
@@ -107,6 +131,53 @@ export class CreateKycApprovalComponent implements OnInit {
       this.kycApprovalForm.value.contact_no,
     );
     kycApprovalFormData.append('email', this.kycApprovalForm.value.email);
-    kycApprovalFormData.append('photo', this.kycApprovalForm.value.photo);
+    for (const files of this.imageForm.value.photos) {
+      const fileObj: File = files.file;
+      kycApprovalFormData.append('image', fileObj);
+    }
+
+    let createKycApprovalResponse: CreateKycApprovalResponse;
+    try {
+      createKycApprovalResponse = await this.kycService.createKycApproval(
+        kycApprovalFormData,
+      );
+    } catch (error) {
+      if (error.error instanceof ErrorEvent) {
+        console.log(error);
+      } else {
+        createKycApprovalResponse = { ...error.error };
+      }
+    }
+    if (createKycApprovalResponse.valid) {
+      this.snackBarService.open(createKycApprovalResponse.message, 'Ok', {
+        duration: 5 * 1000,
+      });
+      this.router.navigate(['/kyc']);
+    } else {
+      // Open Dialog to show dialog data
+      if ('dialog' in createKycApprovalResponse) {
+        const resMesDialogRef = this.dialogService.open(ResMesComponent, {
+          data: createKycApprovalResponse.dialog,
+          autoFocus: true,
+          hasBackdrop: true,
+        });
+        await resMesDialogRef.afterClosed().toPromise();
+      }
+
+      // Open Dialog to show error data
+      if ('error' in createKycApprovalResponse) {
+        if (environment.debug) {
+          const errorDialogRef = this.dialogService.open(ErrorComponent, {
+            data: createKycApprovalResponse.error,
+            autoFocus: true,
+            hasBackdrop: true,
+          });
+          await errorDialogRef.afterClosed().toPromise();
+        }
+      }
+      this.router.navigate(['/kyc']);
+    }
+    this.formLoading = false;
+    this.disableControl = false;
   }
 }

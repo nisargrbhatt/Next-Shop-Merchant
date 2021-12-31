@@ -24,7 +24,7 @@ export class KycService {
   constructor(private httpService: HttpClient) {}
 
   async createKycApproval(
-    createKycApprovalData: CreateKycApprovalData,
+    createKycApprovalData: CreateKycApprovalData | any,
   ): Promise<CreateKycApprovalResponse> {
     return await this.httpService
       .post<CreateKycApprovalResponse>(

@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateKycApprovalComponent } from './create-kyc-approval.component';
+import { KycApprovalsComponent } from './kyc-approvals.component';
 
-describe('CreateKycApprovalComponent', () => {
-  let component: CreateKycApprovalComponent;
-  let fixture: ComponentFixture<CreateKycApprovalComponent>;
+describe('KycApprovalsComponent', () => {
+  let component: KycApprovalsComponent;
+  let fixture: ComponentFixture<KycApprovalsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CreateKycApprovalComponent],
+      declarations: [KycApprovalsComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateKycApprovalComponent);
+    fixture = TestBed.createComponent(KycApprovalsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
