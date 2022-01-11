@@ -1,6 +1,3 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { CreateKycApprovalResponse } from './../kyc.interface';
-
 import {
   FormGroup,
   FormControl,
@@ -11,11 +8,6 @@ import {
 
 import { KycService } from './../kyc.service';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { ErrorComponent } from 'src/app/shared/dialog/error/error.component';
-import { ResMesComponent } from 'src/app/shared/dialog/res-mes/res-mes.component';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-create-kyc-approval',
@@ -34,9 +26,6 @@ export class CreateKycApprovalComponent implements OnInit {
   constructor(
     private kycService: KycService,
     private formBuilder: FormBuilder,
-    private snackBarService: MatSnackBar,
-    private dialogService: MatDialog,
-    private router: Router,
   ) {
     this.imageForm = this.formBuilder.group({
       photos: this.formBuilder.array([]),
@@ -44,9 +33,6 @@ export class CreateKycApprovalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pageLoading = true;
-    this.formLoading = true;
-
     this.kycApprovalForm = this.formBuilder.group({
       name: new FormControl(
         { value: '', disabled: this.disableControl },
@@ -76,9 +62,6 @@ export class CreateKycApprovalComponent implements OnInit {
       ),
       photo: this.formBuilder.array([]),
     });
-
-    this.formLoading = false;
-    this.pageLoading = false;
   }
 
   createItem(data: any): FormGroup {
@@ -117,9 +100,6 @@ export class CreateKycApprovalComponent implements OnInit {
       return;
     }
 
-    this.formLoading = true;
-    this.disableControl = true;
-
     const kycApprovalFormData = new FormData();
     kycApprovalFormData.append('name', this.kycApprovalForm.value.name);
     kycApprovalFormData.append(
@@ -136,48 +116,6 @@ export class CreateKycApprovalComponent implements OnInit {
       kycApprovalFormData.append('image', fileObj);
     }
 
-    let createKycApprovalResponse: CreateKycApprovalResponse;
-    try {
-      createKycApprovalResponse = await this.kycService.createKycApproval(
-        kycApprovalFormData,
-      );
-    } catch (error) {
-      if (error.error instanceof ErrorEvent) {
-        console.log(error);
-      } else {
-        createKycApprovalResponse = { ...error.error };
-      }
-    }
-    if (createKycApprovalResponse.valid) {
-      this.snackBarService.open(createKycApprovalResponse.message, 'Ok', {
-        duration: 5 * 1000,
-      });
-      this.router.navigate(['/kyc']);
-    } else {
-      // Open Dialog to show dialog data
-      if ('dialog' in createKycApprovalResponse) {
-        const resMesDialogRef = this.dialogService.open(ResMesComponent, {
-          data: createKycApprovalResponse.dialog,
-          autoFocus: true,
-          hasBackdrop: true,
-        });
-        await resMesDialogRef.afterClosed().toPromise();
-      }
-
-      // Open Dialog to show error data
-      if ('error' in createKycApprovalResponse) {
-        if (environment.debug) {
-          const errorDialogRef = this.dialogService.open(ErrorComponent, {
-            data: createKycApprovalResponse.error,
-            autoFocus: true,
-            hasBackdrop: true,
-          });
-          await errorDialogRef.afterClosed().toPromise();
-        }
-      }
-      this.router.navigate(['/kyc']);
-    }
-    this.formLoading = false;
-    this.disableControl = false;
+    this.kycService.createKycApproval(kycApprovalFormData);
   }
 }

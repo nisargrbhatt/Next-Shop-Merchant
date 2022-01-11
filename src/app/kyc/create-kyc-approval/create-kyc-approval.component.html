@@ -1,4 +1,4 @@
-<div *ngIf="!pageLoading">
+<div>
   <div class="hero">
     <div class="hero-form">
       <form [formGroup]="kycApprovalForm" (submit)="onCreate()">
@@ -124,13 +124,3 @@
     </div>
   </div>
 </div>
-
-<div class="container">
-  <div class="row">
-    <div
-      class="col-xs-12 col-sm-10 col-md-8 col-md-offset-2 col-sm-offset-1"
-    ></div>
-  </div>
-</div>
-
-<app-loader *ngIf="pageLoading"></app-loader>
