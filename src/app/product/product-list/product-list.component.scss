@@ -1,0 +1,43 @@
+.hero {
+  padding: 0;
+  margin: 0;
+}
+.hero-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  mat-form-field {
+    width: 70%;
+
+    .example-option-img {
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    [dir='rtl'] .example-option-img {
+      margin-right: 0;
+      margin-left: 8px;
+    }
+  }
+}
+
+.hero-data-category {
+  .data-categories {
+    .categories {
+      .category {
+        .category-bar {
+          margin: 0.3rem 1rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .category-name {
+            font-family: 'Fira Code' monospace;
+            font-weight: 550;
+            font-size: large;
+          }
+        }
+      }
+    }
+  }
+}

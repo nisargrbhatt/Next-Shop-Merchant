@@ -10,8 +10,17 @@ import { ResMesComponent } from './dialog/res-mes/res-mes.component';
 import { EmailVerificationComponent } from './dialog/email-verification/email-verification.component';
 import { LoaderComponent } from './loader/loader.component';
 
+import { DragScrollModule } from 'ngx-drag-scroll';
+import { ProductScrollCardsComponent } from './product/product-scroll-cards/product-scroll-cards.component';
+import { ProductCardSmallComponent } from './product/product-card-small/product-card-small.component';
+
 @NgModule({
-  imports: [CommonModule, AngularMaterialModule, RouterModule],
+  imports: [
+    CommonModule,
+    AngularMaterialModule,
+    RouterModule,
+    DragScrollModule,
+  ],
   declarations: [
     SidenavComponent,
     HeaderComponent,
@@ -19,6 +28,8 @@ import { LoaderComponent } from './loader/loader.component';
     ResMesComponent,
     EmailVerificationComponent,
     LoaderComponent,
+    ProductCardSmallComponent,
+    ProductScrollCardsComponent,
   ],
   providers: [],
   exports: [
@@ -28,6 +39,8 @@ import { LoaderComponent } from './loader/loader.component';
     ResMesComponent,
     EmailVerificationComponent,
     LoaderComponent,
+    ProductCardSmallComponent,
+    ProductScrollCardsComponent,
   ],
 })
 export class SharedModule {}

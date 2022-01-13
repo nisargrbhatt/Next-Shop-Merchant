@@ -33,11 +33,19 @@ export const basicAPIURIs = {
   getAllProductsByManufacturerId: '/product/getAllProductsByManufacturerId',
   getAllProductWithSearchByManufacturerId:
     '/product/getAllProductWithSearchByManufacturerId',
+  getAllProductWithCategoryImageByCategoryId:
+    '/product/getAllProductWithCategoryImageByCategoryId',
+  getAllProductWithCategoryImageBySearch:
+    '/product/getAllProductWithCategoryImageBySearch',
+  getAllProductLookaheadWithCategoryImageBySearch:
+    '/product/getAllProductLookaheadWithCategoryImageBySearch',
   // Category Controller
   getAllCategories: '/category/getAllCategories',
   getCategory: '/category/getCategory',
   getCategoryByName: '/category/getCategoryByName',
   getCategoryById: '/category/getCategoryById',
+  getAllCategoriesWithFiveProducts:
+    '/category/getAllCategoriesWithFiveProducts',
   // Image Controller
   getImageByProductId: '/image/getImageByProductId',
   // User Controller
