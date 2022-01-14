@@ -101,7 +101,7 @@ export interface FullProductData {
   name: string;
   description: string;
   small_description: string;
-  specification: string;
+  specification: string | any;
   slug: string;
   categoryId: string;
   userId: string;
@@ -155,4 +155,5 @@ export interface ReviewData {
   stars: number;
   userId: string;
   productId: string;
+  user: UserData;
 }

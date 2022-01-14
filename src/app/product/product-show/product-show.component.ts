@@ -16,6 +16,10 @@ export class ProductShowComponent implements OnInit, OnDestroy {
 
   productDetails: FullProductData;
 
+  selectedImage: number = 0;
+
+  reviewStar: number = 0;
+
   constructor(
     private productService: ProductService,
     private priceService: PriceService,
@@ -31,8 +35,24 @@ export class ProductShowComponent implements OnInit, OnDestroy {
     this.subs.sink = this.productService
       .getProductWithCategoryPriceReviewManufacturer(this.productId)
       .subscribe((data) => {
-        this.productDetails = data;
+        this.productDetails = {
+          ...data,
+          specification: JSON.parse(data.specification),
+        };
+        this.findReviewStar();
       });
+  }
+
+  findReviewStar(): void {
+    let total = this.productDetails.reviewes.length;
+    if (!total) {
+      this.reviewStar = 0;
+      return;
+    }
+    let sum = this.productDetails.reviewes.reduce((previous, current) => {
+      return previous + current.stars;
+    }, 0);
+    this.reviewStar = Math.floor(sum / total);
   }
 
   ngOnDestroy(): void {
