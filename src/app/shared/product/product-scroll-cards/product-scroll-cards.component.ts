@@ -25,8 +25,6 @@ export class ProductScrollCardsComponent implements OnInit {
   }
 
   cardClick(id: string): void {
-    console.log(id);
-
-    // this.router.navigate(['/product/',id]);
+    this.router.navigate(['/product/show/', id]);
   }
 }

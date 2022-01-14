@@ -13,7 +13,7 @@ export interface GetProductWithCategoryPriceReviewManufacturerResponse {
   valid: boolean;
   error?: ErrorData;
   dialog?: DialogData;
-  data?: any;
+  data?: FullProductData;
 }
 
 export interface GetAllProductWithCategoryImageByCategoryIdResponse {
@@ -94,4 +94,65 @@ export interface Category {
 
 export interface Image {
   url: string;
+}
+
+export interface FullProductData {
+  id: string;
+  name: string;
+  description: string;
+  small_description: string;
+  specification: string;
+  slug: string;
+  categoryId: string;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
+  category: CategoryData;
+  prices: PriceData[];
+  reviewes: ReviewData[];
+  user: UserData;
+  images: ImageData[];
+}
+
+export interface CategoryData {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ImageData {
+  id: string;
+  name: string;
+  url: string;
+  productId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface UserData {
+  id: string;
+  email: string;
+  name: string;
+  contact_no?: number;
+  role: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PriceData {
+  id: string;
+  price: number;
+  stock: number;
+  productId: string;
+  merchantId: string;
+  user: UserData;
+}
+
+export interface ReviewData {
+  id: string;
+  message?: string;
+  stars: number;
+  userId: string;
+  productId: string;
 }

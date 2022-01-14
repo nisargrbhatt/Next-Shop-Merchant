@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ProductCardSmallDetails } from './../../shared/product/product.interface';
 import { CategoryService } from './../category.service';
 import {
@@ -11,7 +12,7 @@ import { FormControl } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ProductService } from './../product.service';
 import { SubSink } from 'subsink';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   GetAllProductLookaheadWithCategoryImageBySearchResponseData,
   GetAllProductLookaheadWithCategoryImageBySearchResponseDataRow,
@@ -26,7 +27,7 @@ import { GetAllCategoriesWithFiveProductsResponseData } from '../category.interf
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
 
   currentPage = new FormControl(1);
@@ -49,6 +50,7 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -109,7 +111,7 @@ export class ProductListComponent implements OnInit {
   }
 
   onProductClick(id: string): void {
-    console.log(id);
+    this.router.navigate(['/product/show/', id]);
   }
 
   getProductCardDetails(product: ProductData): ProductCardSmallDetails {
@@ -119,5 +121,9 @@ export class ProductListComponent implements OnInit {
       image: product.images[0].url,
       name: product.name,
     };
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 }

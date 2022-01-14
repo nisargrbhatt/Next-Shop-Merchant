@@ -1,5 +1,6 @@
 import { SharedService } from './../shared/shared.service';
 import {
+  FullProductData,
   GetAllProductLookaheadWithCategoryImageBySearchResponse,
   GetAllProductLookaheadWithCategoryImageBySearchResponseData,
   GetAllProductWithCategoryImageByCategoryIdResponse,
@@ -37,7 +38,7 @@ export class ProductService {
 
   getProductWithCategoryPriceReviewManufacturer(
     productId?: string,
-  ): Observable<any> {
+  ): Observable<FullProductData> {
     return this.httpService
       .get<GetProductWithCategoryPriceReviewManufacturerResponse>(
         BACKEND_URL +

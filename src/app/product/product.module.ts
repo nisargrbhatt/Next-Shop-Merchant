@@ -8,9 +8,11 @@ import { SharedModule } from '../shared/shared.module';
 
 import { NgxViewerModule } from 'ngx-viewer';
 import { ProductListComponent } from './product-list/product-list.component';
+import { ProductCategoryListComponent } from './product-category-list/product-category-list.component';
+import { ProductShowComponent } from './product-show/product-show.component';
 
 @NgModule({
-  declarations: [ProductListComponent],
+  declarations: [ProductListComponent, ProductCategoryListComponent, ProductShowComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,

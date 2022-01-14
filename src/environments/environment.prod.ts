@@ -78,7 +78,7 @@ export const secureAPIURIs = {
   getPrice: { url: '/price/getPrice', hasQuery: true },
   getPricesByMerchantId: {
     url: '/price/getPricesByMerchantId',
-    hasQuery: false,
+    hasQuery: true,
   },
   // Product Controller
   createProduct: { url: '/product/createProduct', hasQuery: false },

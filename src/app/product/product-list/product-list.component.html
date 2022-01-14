@@ -82,7 +82,7 @@
     <mat-paginator
       *ngIf="searchData.count"
       [length]="searchData.count"
-      [pageSize]="approvalsPerPage"
+      [pageSize]="pageSize"
       (page)="onPageChange($event)"
     ></mat-paginator>
   </div>
