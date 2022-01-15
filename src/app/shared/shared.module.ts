@@ -14,6 +14,8 @@ import { DragScrollModule } from 'ngx-drag-scroll';
 import { ProductScrollCardsComponent } from './product/product-scroll-cards/product-scroll-cards.component';
 import { ProductCardSmallComponent } from './product/product-card-small/product-card-small.component';
 import { ProductPriceTableComponent } from './product/product-price-table/product-price-table.component';
+import { PriceAddComponent } from './price/price-add/price-add.component';
+import { PriceShowUpdateComponent } from './price/price-show-update/price-show-update.component';
 
 @NgModule({
   imports: [
@@ -32,6 +34,8 @@ import { ProductPriceTableComponent } from './product/product-price-table/produc
     ProductCardSmallComponent,
     ProductScrollCardsComponent,
     ProductPriceTableComponent,
+    PriceAddComponent,
+    PriceShowUpdateComponent,
   ],
   providers: [],
   exports: [
@@ -44,6 +48,8 @@ import { ProductPriceTableComponent } from './product/product-price-table/produc
     ProductCardSmallComponent,
     ProductScrollCardsComponent,
     ProductPriceTableComponent,
+    PriceAddComponent,
+    PriceShowUpdateComponent,
   ],
 })
 export class SharedModule {}

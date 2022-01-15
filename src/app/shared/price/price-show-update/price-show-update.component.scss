@@ -1,0 +1,35 @@
+.hero {
+  width: 40rem;
+  height: 16rem;
+  display: block;
+  padding: 1rem;
+  margin: 0;
+  border: none;
+  border-radius: 1rem;
+}
+
+.hero-product-name {
+  font-family: 'Fira Code' monospace;
+  color: black;
+  font-weight: 550;
+  font-size: 1.1rem;
+  margin: 0.5rem 0.5rem;
+}
+
+.hero-price-form {
+  margin-top: 0.2rem;
+  form {
+    mat-form-field {
+      display: block;
+      margin: 0.2rem;
+    }
+  }
+}
+.hero-actions {
+  margin: 0.2rem;
+  display: flex;
+  justify-content: flex-end;
+  button {
+    margin: 0.1rem 0.5rem;
+  }
+}

@@ -46,13 +46,41 @@
       <div class="product-small-description">
         {{ productDetails.small_description }}
       </div>
+
+      <div class="product-price-data" *ngIf="priceData">
+        Your Price
+        <div class="price-stock">
+          <div class="price-stock-label">Stock:</div>
+          <div
+            class="price-stock-value"
+            [style.color]="priceData.stock > 10 ? 'green' : 'red'"
+          >
+            {{ priceData.stock }}
+          </div>
+        </div>
+        <div class="price-price">
+          <div class="price-price-label">Price:</div>
+          <div class="price-price-value">
+            {{ priceData.price | currency: 'INR' }}
+          </div>
+        </div>
+      </div>
+
+      <div class="product-actions">
+        <div class="product-add-price" *ngIf="!priceData">
+          <button mat-raised-button color="primary" (click)="addPrice()">
+            Add Price
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Product Price Part  -->
-  <div class="hero-second mat-elevation-z8">
+  <div class="hero-second mat-elevation-z8" *ngIf="productDetails.prices">
     <app-product-price-table
       [priceData]="productDetails.prices"
+      (addToCart)="addToCart($event)"
     ></app-product-price-table>
   </div>
 

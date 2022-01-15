@@ -5,9 +5,10 @@ import { PriceRoutingModule } from './price-routing.module';
 import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from './../angular-material.module';
 import { SharedModule } from './../shared/shared.module';
+import { PricesListComponent } from './prices-list/prices-list.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [PricesListComponent],
   imports: [
     CommonModule,
     PriceRoutingModule,

@@ -70,6 +70,48 @@
     font-weight: 500;
     margin-top: 1rem;
   }
+
+  .product-price-data {
+    margin-top: 1rem;
+    .price-stock {
+      display: flex;
+      .price-stock-label {
+        font-family: 'Fira Code' monospace;
+        font-size: 1rem;
+        color: black;
+        font-weight: 500;
+      }
+      .price-stock-value {
+        font-family: 'Fira Code' monospace;
+        font-size: 1rem;
+        font-weight: 500;
+        margin-left: 0.5rem;
+      }
+    }
+
+    .price-price {
+      display: flex;
+      .price-price-label {
+        font-family: 'Fira Code' monospace;
+        font-size: 1rem;
+        color: black;
+        font-weight: 500;
+      }
+      .price-price-value {
+        font-family: 'Fira Code' monospace;
+        font-size: 1rem;
+        color: black;
+        font-weight: 500;
+        margin-left: 0.5rem;
+      }
+    }
+  }
+
+  .product-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
 }
 
 .star-yellow {

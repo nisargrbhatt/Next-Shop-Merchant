@@ -27,11 +27,11 @@ export class ProductPriceTableComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<PriceData>;
   displayedColumns: string[] = ['merchant_name', 'price', 'action'];
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.priceData);
   }
-
-  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;

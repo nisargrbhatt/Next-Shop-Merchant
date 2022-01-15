@@ -12,7 +12,11 @@ import { ProductCategoryListComponent } from './product-category-list/product-ca
 import { ProductShowComponent } from './product-show/product-show.component';
 
 @NgModule({
-  declarations: [ProductListComponent, ProductCategoryListComponent, ProductShowComponent],
+  declarations: [
+    ProductListComponent,
+    ProductCategoryListComponent,
+    ProductShowComponent,
+  ],
   imports: [
     CommonModule,
     ProductRoutingModule,

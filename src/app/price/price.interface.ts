@@ -39,11 +39,11 @@ export interface GetPriceResponse {
   valid: boolean;
   dialog?: DialogData;
   error?: ErrorData;
-  data?: any;
+  data?: PriceData;
 }
 
 export interface GetPricesByMerchantIdResponseData {
-  rows: any[];
+  rows: PriceData[];
   count: number;
 }
 
@@ -53,4 +53,38 @@ export interface GetPricesByMerchantIdResponse {
   dialog?: DialogData;
   error?: ErrorData;
   data?: GetPricesByMerchantIdResponseData;
+}
+
+export interface PriceData {
+  id: string;
+  price: number;
+  stock: number;
+  merchantId: string;
+  productId: string;
+  createdAt: string;
+  updatedAt: string;
+  product?: ProductData;
+}
+
+export interface ProductData {
+  id: string;
+  name: string;
+  description: string;
+  small_description: string;
+  specification: string;
+  slug: string;
+  categoryId: string;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
+  images?: ImageData[];
+}
+
+export interface ImageData {
+  id: string;
+  name: string;
+  url: string;
+  productId: string;
+  createdAt: string;
+  updatedAt: string;
 }

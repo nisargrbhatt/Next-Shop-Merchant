@@ -1,0 +1,50 @@
+<div mat-dialog-title>{{ dialogData.name }}'s Price</div>
+<div mat-dialog-content>
+  <form [formGroup]="priceForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Price</mat-label>
+      <input
+        type="number"
+        formControlName="price"
+        matInput
+        name="price"
+        placeholder="Price of the product"
+      />
+      <mat-error *ngIf="priceForm.get('price').hasError('required')"
+        >Price is required</mat-error
+      >
+      <mat-error *ngIf="priceForm.get('price').hasError('min')"
+        >Minimum price is 1</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label> Stock </mat-label>
+      <input
+        type="number"
+        formControlName="stock"
+        matInput
+        placeholder="Stock of the product"
+      />
+      <mat-error *ngIf="priceForm.get('stock').hasError('required')"
+        >Stock is required</mat-error
+      >
+      <mat-error *ngIf="priceForm.get('stock').hasError('min')"
+        >Minimum stock is 1</mat-error
+      >
+      <mat-error *ngIf="priceForm.get('stock').hasError('max')"
+        >Maximum stock is 100</mat-error
+      >
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onSubmit()"
+    [disabled]="priceForm.invalid"
+  >
+    Submit
+  </button>
+  <button mat-button color="warn" (click)="onClose()">Cancel</button>
+</div>

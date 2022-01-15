@@ -58,7 +58,7 @@ export class PriceService {
         this.snackbarService.open(response.message, 'Ok', {
           duration: 2 * 1000,
         });
-        this.router.navigate(['/price']);
+        // this.router.navigate(['/price']);
       });
   }
 
