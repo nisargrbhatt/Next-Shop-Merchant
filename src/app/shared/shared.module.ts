@@ -10,8 +10,20 @@ import { ResMesComponent } from './dialog/res-mes/res-mes.component';
 import { EmailVerificationComponent } from './dialog/email-verification/email-verification.component';
 import { LoaderComponent } from './loader/loader.component';
 
+import { DragScrollModule } from 'ngx-drag-scroll';
+import { ProductScrollCardsComponent } from './product/product-scroll-cards/product-scroll-cards.component';
+import { ProductCardSmallComponent } from './product/product-card-small/product-card-small.component';
+import { ProductPriceTableComponent } from './product/product-price-table/product-price-table.component';
+import { PriceAddComponent } from './price/price-add/price-add.component';
+import { PriceShowUpdateComponent } from './price/price-show-update/price-show-update.component';
+
 @NgModule({
-  imports: [CommonModule, AngularMaterialModule, RouterModule],
+  imports: [
+    CommonModule,
+    AngularMaterialModule,
+    RouterModule,
+    DragScrollModule,
+  ],
   declarations: [
     SidenavComponent,
     HeaderComponent,
@@ -19,6 +31,11 @@ import { LoaderComponent } from './loader/loader.component';
     ResMesComponent,
     EmailVerificationComponent,
     LoaderComponent,
+    ProductCardSmallComponent,
+    ProductScrollCardsComponent,
+    ProductPriceTableComponent,
+    PriceAddComponent,
+    PriceShowUpdateComponent,
   ],
   providers: [],
   exports: [
@@ -28,6 +45,11 @@ import { LoaderComponent } from './loader/loader.component';
     ResMesComponent,
     EmailVerificationComponent,
     LoaderComponent,
+    ProductCardSmallComponent,
+    ProductScrollCardsComponent,
+    ProductPriceTableComponent,
+    PriceAddComponent,
+    PriceShowUpdateComponent,
   ],
 })
 export class SharedModule {}

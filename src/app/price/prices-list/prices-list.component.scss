@@ -1,0 +1,23 @@
+.hero {
+  padding: 0;
+  margin: 0;
+}
+.hero-title {
+  text-align: center;
+  font-family: 'Fira Code' monospace;
+  font-size: 2rem;
+  font-weight: 500;
+  margin-top: 1.5rem;
+}
+
+.hero-inventory {
+  padding: 1rem;
+  width: 100%;
+
+  mat-accordion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}

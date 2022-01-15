@@ -1,0 +1,17 @@
+<div class="hero" *ngIf="pricesData">
+  <div class="hero-title">Your Inventory</div>
+  <div class="hero-inventory">
+    <mat-accordion multi="true">
+      <app-price-show-update
+        *ngFor="let priceData of pricesData.rows"
+        [priceData]="priceData"
+      ></app-price-show-update>
+    </mat-accordion>
+    <mat-paginator
+      *ngIf="pricesData.count"
+      [length]="pricesData.count"
+      [pageSize]="pageSize"
+      (page)="onPageChange($event)"
+    ></mat-paginator>
+  </div>
+</div>
