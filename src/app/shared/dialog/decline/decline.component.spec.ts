@@ -8,9 +8,8 @@ describe('DeclineComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeclineComponent ]
-    })
-    .compileComponents();
+      declarations: [DeclineComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
