@@ -1,0 +1,131 @@
+<div class="hero">
+  <div class="hero-bar">
+    <button mat-flat-button color="primary" type="button">
+      Orders: {{ totalOrders }}
+    </button>
+    <mat-form-field appearance="outline" color="primary">
+      <mat-select [formControl]="filterCtr">
+        <mat-option *ngFor="let value of filterValues" [value]="value">{{
+          value
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      (click)="refreshOrders()"
+    >
+      Refresh
+    </button>
+  </div>
+  <mat-drawer-container hasBackdrop="false">
+    <mat-drawer-content>
+      <div class="hero-order" *ngIf="ordersData">
+        <div
+          [class]="showOrderDetails ? 'hero-order-table' : 'hero-order-table'"
+          id="order-table"
+        >
+          <app-order-list-table
+            [orderData]="ordersData"
+            (selectOrder)="onOrderSelect($event); drawer.toggle()"
+            (pageEvent)="onPageChange($event)"
+          ></app-order-list-table>
+        </div>
+      </div>
+    </mat-drawer-content>
+    <mat-drawer #drawer mode="over" position="end">
+      <div
+        [class]="showOrderDetails ? 'hero-order-details' : 'hero-order-details'"
+        id="order-details"
+        *ngIf="showOrderDetails && selectedOrder"
+      >
+        <button
+          mat-icon-button
+          type="button"
+          id="order-details-close-btn"
+          (click)="onCloseOrderDetails(); drawer.toggle()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <br />
+        <br />
+        <div class="product-details">
+          <div class="product-img">
+            <img
+              [src]="selectedOrder.product.images[0].url"
+              [alt]="selectedOrder.product.name"
+            />
+          </div>
+          <div class="product-name">
+            {{ selectedOrder.product.name }}
+          </div>
+
+          <div class="product-quantity">
+            Quantity: x{{ selectedOrder.quantity }}
+          </div>
+          <div
+            class="order-action"
+            *ngIf="selectedOrder.order_decision_status === false"
+          >
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="acceptOrder(); drawer.toggle()"
+            >
+              Accept
+            </button>
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="declineOrder(); drawer.toggle()"
+            >
+              Reject
+            </button>
+          </div>
+          <div class="user-details">
+            <p>Customer Details:</p>
+            <div class="user-name">
+              <p class="user-name-label">Name:</p>
+              <p class="user-name-value">{{ selectedOrder.user.name }}</p>
+            </div>
+            <div class="user-email" *ngIf="selectedOrder.user.email">
+              <p class="user-email-label">Email:</p>
+              <p class="user-email-value">{{ selectedOrder.user.email }}</p>
+            </div>
+            <div class="user-contact" *ngIf="selectedOrder.user.contact_no">
+              <p class="user-contact-label">Contact No:</p>
+              <p class="user-contact-value">
+                {{ selectedOrder.user.contact_no }}
+              </p>
+            </div>
+          </div>
+          <div class="user-address">
+            <p>Delivery Address:</p>
+            <address>
+              {{ selectedOrder.address.name }}<br />
+              {{ selectedOrder.address.address_line1 }}<br />
+              {{ selectedOrder.address.address_line2 }}<br />
+              {{ selectedOrder.address.city }},
+              {{ selectedOrder.address.zipcode }}<br />
+              {{ selectedOrder.address.state }}<br />
+            </address>
+          </div>
+          <div class="merchant-price">
+            <p>Your Price:</p>
+            <div class="price-price">
+              <p class="price-price-label">Price:</p>
+              <p class="price-price-value">
+                {{ selectedOrder.price.price | currency: 'INR' }}
+              </p>
+            </div>
+            <div class="price-stock">
+              <p class="price-stock-label">Stock:</p>
+              <p class="price-stock-value">{{ selectedOrder.price.stock }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-drawer>
+  </mat-drawer-container>
+</div>

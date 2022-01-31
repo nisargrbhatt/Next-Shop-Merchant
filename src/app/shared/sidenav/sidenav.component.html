@@ -2,11 +2,7 @@
   <a class="closebtn" (click)="closeNav()">&times;</a>
 
   <span>
-    <a
-      routerLink="auth/login"
-      routerLinkActive="mat-accent"
-      *ngIf="!isAuthenticated"
-      (click)="auth0Login()"
+    <a *ngIf="!isAuthenticated" (click)="auth0Login()"
       ><mat-icon>login</mat-icon> Login</a
     >
 
@@ -32,6 +28,13 @@
       routerLinkActive="mat-accent"
       (click)="closeNav()"
       ><mat-icon> inventory_2</mat-icon> Inventory</a
+    >
+    <a
+      *ngIf="isAuthenticated"
+      routerLink="order"
+      routerLinkActive="mat-accent"
+      (click)="closeNav()"
+      ><mat-icon> fact_check</mat-icon> Order</a
     >
 
     <a

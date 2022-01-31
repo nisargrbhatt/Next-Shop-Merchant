@@ -16,6 +16,9 @@ import { ProductCardSmallComponent } from './product/product-card-small/product-
 import { ProductPriceTableComponent } from './product/product-price-table/product-price-table.component';
 import { PriceAddComponent } from './price/price-add/price-add.component';
 import { PriceShowUpdateComponent } from './price/price-show-update/price-show-update.component';
+import { OrderListTableComponent } from './order/order-list-table/order-list-table.component';
+import { ConfirmComponent } from './dialog/confirm/confirm.component';
+import { DeclineComponent } from './dialog/decline/decline.component';
 
 @NgModule({
   imports: [
@@ -36,6 +39,9 @@ import { PriceShowUpdateComponent } from './price/price-show-update/price-show-u
     ProductPriceTableComponent,
     PriceAddComponent,
     PriceShowUpdateComponent,
+    OrderListTableComponent,
+    ConfirmComponent,
+    DeclineComponent,
   ],
   providers: [],
   exports: [
@@ -50,6 +56,9 @@ import { PriceShowUpdateComponent } from './price/price-show-update/price-show-u
     ProductPriceTableComponent,
     PriceAddComponent,
     PriceShowUpdateComponent,
+    OrderListTableComponent,
+    ConfirmComponent,
+    DeclineComponent,
   ],
 })
 export class SharedModule {}
