@@ -58,6 +58,7 @@ export interface ProductData {
   updatedAt: string;
   images?: Image[];
   category?: Category;
+  reviewes?: ReviewData[];
 }
 
 export interface Category {

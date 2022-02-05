@@ -24,6 +24,17 @@ export class ProductScrollCardsComponent implements OnInit {
     };
   }
 
+  getReviewStar(product: Product): [number, number] {
+    const total = product.reviewes.length;
+    if (!total) {
+      return [0, 0];
+    }
+    const sum = product.reviewes.reduce((previous, current) => {
+      return previous + current.stars;
+    }, 0);
+    return [Math.floor(sum / total), total];
+  }
+
   cardClick(id: string): void {
     this.router.navigate(['/product/show/', id]);
   }

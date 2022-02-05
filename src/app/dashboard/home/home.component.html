@@ -1,0 +1,14 @@
+<app-bar-line-chart
+  [acceptedChartData]="acceptedChartData"
+  [rejectedChartData]="rejectedChartData"
+  [canceledChartData]="canceledChartData"
+  [unpaidChartData]="unpaidChartData"
+  [deliveredChartData]="deliveredChartData"
+  *ngIf="
+    acceptedChartData &&
+    rejectedChartData &&
+    canceledChartData &&
+    unpaidChartData &&
+    deliveredChartData
+  "
+></app-bar-line-chart>

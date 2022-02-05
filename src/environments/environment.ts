@@ -180,6 +180,27 @@ export const secureAPIURIs = {
     url: '/transaction/getRazorpayCustomer',
     hasQuery: true,
   },
+  // Analytic Controller
+  getAcceptedOrderOfMerchantByMonth: {
+    url: '/analytic/getAcceptedOrderOfMerchantByMonth',
+    hasQuery: false,
+  },
+  getRejectedOrderOfMerchantByMonth: {
+    url: '/analytic/getRejectedOrderOfMerchantByMonth',
+    hasQuery: false,
+  },
+  getDeliveredOrderOfMerchantByMonth: {
+    url: '/analytic/getDeliveredOrderOfMerchantByMonth',
+    hasQuery: false,
+  },
+  getCanceledOrderOfMerchantByMonth: {
+    url: '/analytic/getCanceledOrderOfMerchantByMonth',
+    hasQuery: false,
+  },
+  getUnpaidOrderOfMerchantByMonth: {
+    url: '/analytic/getUnpaidOrderOfMerchantByMonth',
+    hasQuery: false,
+  },
 };
 
 /*

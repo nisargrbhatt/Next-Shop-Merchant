@@ -1,4 +1,3 @@
-import { Auth0Service } from './../auth/auth0.service';
 import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from './../angular-material.module';
 import { CommonModule } from '@angular/common';
@@ -19,6 +18,8 @@ import { PriceShowUpdateComponent } from './price/price-show-update/price-show-u
 import { OrderListTableComponent } from './order/order-list-table/order-list-table.component';
 import { ConfirmComponent } from './dialog/confirm/confirm.component';
 import { DeclineComponent } from './dialog/decline/decline.component';
+
+import { BarLineChartComponent } from './charts/bar-line-chart/bar-line-chart.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { DeclineComponent } from './dialog/decline/decline.component';
     OrderListTableComponent,
     ConfirmComponent,
     DeclineComponent,
+    BarLineChartComponent,
   ],
   providers: [],
   exports: [
@@ -59,6 +61,7 @@ import { DeclineComponent } from './dialog/decline/decline.component';
     OrderListTableComponent,
     ConfirmComponent,
     DeclineComponent,
+    BarLineChartComponent,
   ],
 })
 export class SharedModule {}
