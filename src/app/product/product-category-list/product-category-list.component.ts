@@ -17,6 +17,7 @@ import {
 import { BehaviorSubject } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import { ProductCardSmallDetails } from 'src/app/shared/product/product.interface';
+import { Product } from '../category.interface';
 
 @Component({
   selector: 'app-product-category-list',
@@ -105,6 +106,17 @@ export class ProductCategoryListComponent implements OnInit, OnDestroy {
       image: product.images[0].url,
       name: product.name,
     };
+  }
+
+  getReviewStar(product: ProductData): [number, number] {
+    const total = product.reviewes.length;
+    if (!total) {
+      return [0, 0];
+    }
+    const sum = product.reviewes.reduce((previous, current) => {
+      return previous + current.stars;
+    }, 0);
+    return [Math.floor(sum / total), total];
   }
 
   ngOnDestroy(): void {

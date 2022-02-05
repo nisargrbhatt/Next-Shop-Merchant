@@ -33,6 +33,11 @@ const routes: Routes = [
       import('./order/order.module').then((m) => m.OrderModule),
   },
   {
+    path: '',
+    loadChildren: () =>
+      import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+  },
+  {
     path: '**',
     component: Error404Component,
   },
