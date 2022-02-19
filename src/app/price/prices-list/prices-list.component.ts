@@ -27,6 +27,8 @@ export class PricesListComponent implements OnInit, OnDestroy {
   totalPrices = 0;
   pricesData: GetPricesByMerchantIdResponseData;
 
+  mybreakpoint: number;
+
   constructor(
     private router: Router,
     private dialogService: MatDialog,
@@ -34,6 +36,11 @@ export class PricesListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.mybreakpoint = window.innerWidth <= 1000 ? 2 : 4;
+    if (window.innerWidth <= 532) {
+      this.mybreakpoint = 1;
+    }
+
     this.subs.sink = this.currentPage$
       .pipe(
         distinctUntilChanged(),
@@ -63,6 +70,13 @@ export class PricesListComponent implements OnInit, OnDestroy {
 
   onPageChange(event: PageEvent): void {
     this.currentPage.next(event.pageIndex + 1);
+  }
+
+  handleSize(event: any): void {
+    this.mybreakpoint = event.target.innerWidth <= 1000 ? 2 : 4;
+    if (event.target.innerWidth <= 532) {
+      this.mybreakpoint = 1;
+    }
   }
 
   ngOnDestroy(): void {

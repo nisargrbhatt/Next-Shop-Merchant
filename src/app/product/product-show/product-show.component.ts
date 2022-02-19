@@ -90,10 +90,6 @@ export class ProductShowComponent implements OnInit, OnDestroy {
     this.priceService.addPrice(dialogReturnData.data);
   }
 
-  addToCart(id: string): void {
-    console.log(id);
-  }
-
   ngOnDestroy(): void {
     this.subs.unsubscribe();
   }

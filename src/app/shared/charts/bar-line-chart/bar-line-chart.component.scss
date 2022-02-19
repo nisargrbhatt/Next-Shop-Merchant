@@ -25,3 +25,19 @@ canvas {
   justify-content: center;
   align-items: center;
 }
+
+@media screen and (max-width: 756px) {
+  .hero-row-1 {
+    flex-direction: column;
+  }
+  .hero-row-2 {
+    flex-direction: column;
+  }
+  .hero-row-3 {
+    flex-direction: column;
+  }
+  canvas {
+    width: 90vw;
+    height: 50vh;
+  }
+}

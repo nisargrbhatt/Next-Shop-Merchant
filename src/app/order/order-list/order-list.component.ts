@@ -43,6 +43,8 @@ export class OrderListComponent implements OnInit, OnDestroy {
   showOrderDetails = false;
   selectedOrder: GetAllMerchantDecisionPendingOrderResponseDataRow;
 
+  mybreakpoint: string;
+
   constructor(
     private orderService: OrderService,
     private router: Router,
@@ -51,6 +53,8 @@ export class OrderListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.mybreakpoint = window.innerWidth <= 1000 ? '400px' : '700px';
+
     this.subs.sink = this.currentPage$
       .pipe(
         switchMap((currentPage: number) => {
@@ -162,6 +166,10 @@ export class OrderListComponent implements OnInit, OnDestroy {
 
         this.refreshOrders();
       });
+  }
+
+  handleSize(event: any): void {
+    this.mybreakpoint = event.target.innerWidth <= 1000 ? '450px' : '300px';
   }
 
   onPageChange(pageEvent: PageEvent): void {
