@@ -34,7 +34,6 @@ export class DeclineComponent implements OnInit {
   onCancel(): void {
     const cancelData = {
       action: false,
-      reason: null,
     };
     this.dialogRef.close(cancelData);
   }
