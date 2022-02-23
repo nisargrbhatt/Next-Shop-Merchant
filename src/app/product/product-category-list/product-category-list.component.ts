@@ -43,6 +43,8 @@ export class ProductCategoryListComponent implements OnInit, OnDestroy {
 
   categoryData: GetAllProductWithCategoryImageByCategoryIdResponseData;
 
+  mybreakpoint: number;
+
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
@@ -50,8 +52,13 @@ export class ProductCategoryListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (this.route.snapshot.params.id) {
-      this.categoryId = this.route.snapshot.params.id;
+    this.mybreakpoint = window.innerWidth <= 1000 ? 2 : 4;
+    if (window.innerWidth <= 532) {
+      this.mybreakpoint = 1;
+    }
+
+    if (this.route.snapshot.params['id']) {
+      this.categoryId = this.route.snapshot.params['id'];
     }
 
     this.subs.sink = this.search$
@@ -117,6 +124,13 @@ export class ProductCategoryListComponent implements OnInit, OnDestroy {
       return previous + current.stars;
     }, 0);
     return [Math.floor(sum / total), total];
+  }
+
+  handleSize(event: any): void {
+    this.mybreakpoint = event.target.innerWidth <= 1000 ? 2 : 4;
+    if (event.target.innerWidth <= 532) {
+      this.mybreakpoint = 1;
+    }
   }
 
   ngOnDestroy(): void {

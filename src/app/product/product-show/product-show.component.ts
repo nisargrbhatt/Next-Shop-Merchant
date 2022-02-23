@@ -39,8 +39,8 @@ export class ProductShowComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (this.route.snapshot.params.id) {
-      this.productId = this.route.snapshot.params.id;
+    if (this.route.snapshot.params['id']) {
+      this.productId = this.route.snapshot.params['id'];
     }
     this.profileClaims = this.authService.ProfileClaims;
 
@@ -88,10 +88,6 @@ export class ProductShowComponent implements OnInit, OnDestroy {
       return;
     }
     this.priceService.addPrice(dialogReturnData.data);
-  }
-
-  addToCart(id: string): void {
-    console.log(id);
   }
 
   ngOnDestroy(): void {

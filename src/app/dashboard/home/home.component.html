@@ -12,3 +12,14 @@
     deliveredChartData
   "
 ></app-bar-line-chart>
+<app-loader
+  *ngIf="
+    !(
+      acceptedChartData &&
+      rejectedChartData &&
+      canceledChartData &&
+      unpaidChartData &&
+      deliveredChartData
+    )
+  "
+></app-loader>

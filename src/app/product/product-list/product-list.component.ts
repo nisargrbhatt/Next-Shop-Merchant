@@ -47,6 +47,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   categoryData: GetAllCategoriesWithFiveProductsResponseData;
 
+  mybreakpoint: number;
+
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
@@ -54,6 +56,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.mybreakpoint = window.innerWidth <= 1000 ? 2 : 4;
+    if (window.innerWidth <= 532) {
+      this.mybreakpoint = 1;
+    }
+
     this.subs.sink = this.categoryService
       .getAllCategoriesWithFiveProducts()
       .subscribe((data) => {
@@ -132,6 +139,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
       return previous + current.stars;
     }, 0);
     return [Math.floor(sum / total), total];
+  }
+
+  handleSize(event: any): void {
+    this.mybreakpoint = event.target.innerWidth <= 1000 ? 2 : 4;
+    if (event.target.innerWidth <= 532) {
+      this.mybreakpoint = 1;
+    }
   }
 
   ngOnDestroy(): void {

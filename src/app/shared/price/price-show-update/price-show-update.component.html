@@ -1,4 +1,4 @@
-<div class="hero mat-elevation-z8" *ngIf="priceData">
+<!-- <div class="hero mat-elevation-z8" *ngIf="priceData">
   <div class="hero-product-name">
     {{ priceData.product.name }}
   </div>
@@ -71,4 +71,80 @@
       Submit
     </button>
   </div>
-</div>
+</div> -->
+
+<!-- NEW DESIGN -->
+<mat-card class="example-card" *ngIf="priceData">
+  <mat-card-header>
+    <mat-card-title [routerLink]="['/product/show/', priceData.product.id]">
+      {{ priceData.product.name }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="priceForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <input
+          type="number"
+          formControlName="price"
+          matInput
+          name="price"
+          placeholder="Price of the product"
+        />
+        <mat-error *ngIf="priceForm.get('price').hasError('required')"
+          >Price is required</mat-error
+        >
+        <mat-error *ngIf="priceForm.get('price').hasError('min')"
+          >Minimum price is 1</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label> Stock </mat-label>
+        <input
+          type="number"
+          formControlName="stock"
+          matInput
+          placeholder="Stock of the product"
+        />
+        <mat-error *ngIf="priceForm.get('stock').hasError('required')"
+          >Stock is required</mat-error
+        >
+        <mat-error *ngIf="priceForm.get('stock').hasError('min')"
+          >Minimum stock is 1</mat-error
+        >
+        <mat-error *ngIf="priceForm.get('stock').hasError('max')"
+          >Maximum stock is 100</mat-error
+        >
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      type="button"
+      (click)="enablePriceForm()"
+      color="primary"
+      *ngIf="priceForm.disabled"
+    >
+      Edit
+    </button>
+    <button
+      mat-button
+      type="button"
+      (click)="disablePriceForm()"
+      color="warn"
+      *ngIf="priceForm.enabled"
+    >
+      Cancel
+    </button>
+    <button
+      mat-raised-button
+      type="button"
+      (click)="onSubmit()"
+      color="accent"
+      *ngIf="priceForm.enabled"
+    >
+      Submit
+    </button>
+  </mat-card-actions>
+</mat-card>

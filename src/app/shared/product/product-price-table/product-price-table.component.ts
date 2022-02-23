@@ -19,13 +19,17 @@ import { PriceData } from 'src/app/product/product.interface';
 })
 export class ProductPriceTableComponent implements OnInit, AfterViewInit {
   @Input() priceData: PriceData[];
-  @Output() addToCart: EventEmitter<string> = new EventEmitter<string>();
+  // @Output() addToCart: EventEmitter<string> = new EventEmitter<string>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   dataSource: MatTableDataSource<PriceData>;
-  displayedColumns: string[] = ['merchant_name', 'price', 'action'];
+  displayedColumns: string[] = [
+    'merchant_name',
+    'price',
+    // 'action'
+  ];
 
   constructor() {}
 
@@ -38,7 +42,7 @@ export class ProductPriceTableComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  onAddToCart(id: string): void {
-    this.addToCart.emit(id);
-  }
+  // onAddToCart(id: string): void {
+  //   this.addToCart.emit(id);
+  // }
 }

@@ -1,11 +1,18 @@
 <div class="hero" *ngIf="pricesData">
-  <div class="hero-title">Your Inventory</div>
+  <div class="hero-title mat-display-2">Your Inventory</div>
   <div class="hero-inventory">
     <mat-accordion multi="true">
-      <app-price-show-update
-        *ngFor="let priceData of pricesData.rows"
-        [priceData]="priceData"
-      ></app-price-show-update>
+      <mat-grid-list
+        [cols]="mybreakpoint"
+        rowHeight="450px"
+        (window:resize)="handleSize($event)"
+      >
+        <mat-grid-tile *ngFor="let priceData of pricesData.rows">
+          <app-price-show-update
+            [priceData]="priceData"
+          ></app-price-show-update>
+        </mat-grid-tile>
+      </mat-grid-list>
     </mat-accordion>
     <mat-paginator
       *ngIf="pricesData.count"
@@ -15,3 +22,4 @@
     ></mat-paginator>
   </div>
 </div>
+<app-loader *ngIf="!pricesData"></app-loader>

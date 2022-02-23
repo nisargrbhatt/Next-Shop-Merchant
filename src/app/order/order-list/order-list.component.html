@@ -1,31 +1,37 @@
 <div class="hero">
-  <div class="hero-bar">
-    <button mat-flat-button color="primary" type="button">
-      Orders: {{ totalOrders }}
-    </button>
-    <mat-form-field appearance="outline" color="primary">
-      <mat-select [formControl]="filterCtr">
-        <mat-option *ngFor="let value of filterValues" [value]="value">{{
-          value
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button
-      mat-flat-button
-      color="primary"
-      type="button"
-      (click)="refreshOrders()"
-    >
-      Refresh
-    </button>
-  </div>
+  <!-- <div class="hero-bar">
+
+  </div> -->
+  <mat-toolbar color="primary">
+    <div class="part-one">
+      <button mat-flat-button color="primary" type="button">
+        Orders: {{ totalOrders }}
+      </button>
+    </div>
+    <div class="part-two">
+      <mat-form-field appearance="fill" color="primary">
+        <mat-select [formControl]="filterCtr">
+          <mat-option *ngFor="let value of filterValues" [value]="value">{{
+            value
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="part-three">
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        (click)="refreshOrders()"
+      >
+        Refresh
+      </button>
+    </div>
+  </mat-toolbar>
   <mat-drawer-container hasBackdrop="false">
     <mat-drawer-content>
       <div class="hero-order" *ngIf="ordersData">
-        <div
-          [class]="showOrderDetails ? 'hero-order-table' : 'hero-order-table'"
-          id="order-table"
-        >
+        <div class="hero-order-table" id="order-table">
           <app-order-list-table
             [orderData]="ordersData"
             (selectOrder)="onOrderSelect($event); drawer.toggle()"
@@ -36,8 +42,10 @@
     </mat-drawer-content>
     <mat-drawer #drawer mode="over" position="end">
       <div
-        [class]="showOrderDetails ? 'hero-order-details' : 'hero-order-details'"
+        class="hero-order-details"
         id="order-details"
+        [style.width]="mybreakpoint"
+        (window:resize)="handleSize($event)"
         *ngIf="showOrderDetails && selectedOrder"
       >
         <button
@@ -50,7 +58,7 @@
         </button>
         <br />
         <br />
-        <div class="product-details">
+        <!-- <div class="product-details">
           <div class="product-img">
             <img
               [src]="selectedOrder.product.images[0].url"
@@ -124,7 +132,103 @@
               <p class="price-stock-value">{{ selectedOrder.price.stock }}</p>
             </div>
           </div>
-        </div>
+        </div> -->
+
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>
+              {{ selectedOrder.product.name }}
+            </mat-card-title>
+          </mat-card-header>
+          <img
+            mat-card-image
+            [src]="selectedOrder.product.images[0].url"
+            [alt]="selectedOrder.product.name"
+          />
+          <mat-card-content>
+            <p class="mat-subheading-2">
+              Quantity:
+              <span class="mat-subheading-1"
+                >x{{ selectedOrder.quantity }}</span
+              >
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="acceptOrder(); drawer.toggle()"
+            >
+              Accept
+            </button>
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="declineOrder(); drawer.toggle()"
+            >
+              Reject
+            </button>
+          </mat-card-actions>
+        </mat-card>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>CUSTOMER DETAILS</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p class="mat-subheading-2">
+              Name:
+              <span class="mat-subheading-1">{{
+                selectedOrder.user.name
+              }}</span>
+            </p>
+            <p class="mat-subheading-2" *ngIf="selectedOrder.user.email">
+              Email:
+              <span class="mat-subheading-1">{{
+                selectedOrder.user.email
+              }}</span>
+            </p>
+            <p class="mat-subheading-2" *ngIf="selectedOrder.user.contact_no">
+              Contact No:
+              <span class="mat-subheading-1">{{
+                selectedOrder.user.contact_no
+              }}</span>
+            </p>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>DELIVERY ADDRESS</mat-panel-title>
+            </mat-expansion-panel-header>
+            <address class="mat-subheading-2">
+              {{ selectedOrder.address.name }}<br />
+              {{ selectedOrder.address.address_line1 }}<br />
+              {{ selectedOrder.address.address_line2 }}<br />
+              {{ selectedOrder.address.city }},
+              {{ selectedOrder.address.zipcode }}<br />
+              {{ selectedOrder.address.state }}<br />
+            </address>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>YOUR PRICE</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p class="mat-subheading-2">
+              Price:
+              <span class="mat-subheading-1">
+                {{ selectedOrder.price.price | currency: 'INR' }}</span
+              >
+            </p>
+            <p class="mat-subheading-2">
+              Stock:
+              <span class="mat-subheading-1">{{
+                selectedOrder.price.stock
+              }}</span>
+            </p>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
     </mat-drawer>
   </mat-drawer-container>
