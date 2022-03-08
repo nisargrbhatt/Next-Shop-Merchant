@@ -33,6 +33,10 @@ const routes: Routes = [
       import('./order/order.module').then((m) => m.OrderModule),
   },
   {
+    path: 'chat',
+    loadChildren: () => import('./chat/chat.module').then((m) => m.ChatModule),
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
